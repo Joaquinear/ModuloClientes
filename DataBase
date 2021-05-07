@@ -1,0 +1,44 @@
+create table persona(
+Ci int not null,
+Nombres varchar(100) not null,
+Apellido_Paterno varchar(50)  not null,
+Apellido_Materno varchar(50) not null,
+Telefono int not null,
+Direccion varchar(200) not null,
+Email varchar(100) not null,
+primary key (Ci)
+);
+
+create table roles(
+    Id_Role int not null auto_increment,
+    Nombre varchar(30),
+    descripcion varchar(30),
+    primary key(Id_Role)
+);
+
+create table estado(
+    Id_Estado int not null auto_increment,
+    Estado varchar(30),
+    primary key(id_Estado)
+);
+
+create table trabajador(
+Id_Trabajar int not null auto_increment,
+id_Role INT NOT NULL,
+usuario varchar(50) not null,
+contrasenha varchar(50) not null,
+Id_Estado int not null,
+Id_Persona_CI int not null,
+primary key (Id_Trabajar),
+foreign key id_Role references roles(Id_Role),
+foreign key Id_Estado references estado(Id_Estado)
+foreign key Id_Persona_CI references persona(Ci)
+);
+
+create table Cliente_Proveedor(
+    Id_Cliente_Proveedor int not null auto_increment,
+    Id_Persona_CI INT NOT NULL,
+    Nit int not null,
+    primary key (Id_Cliente_Proveedor),
+    foreign key Id_Persona_CI references persona(Ci)
+);

@@ -26,7 +26,18 @@ class Usuario{
 		
 
 		$consulta="
-		select * from personas per where (per.Usuario = '$usuario') and (per.Contrasenha = '$contraseha')";
+		select
+			per.Nombres,
+			per.Apellido_Paterno,
+			per.Apellido_Materno,
+			tr.usuario,
+			tr.contrasenha,
+			tr.Id_Trabajar, 
+			tr.id_Role 
+		 from trabajador tr inner join persona per on tr.Id_Persona_CI = per.Ci 
+		 	where usuario = '$usuario' and contrasenha = '$contraseha'";
+		// select * from personas per where (per.Usuario = '$usuario') and (per.Contrasenha = '$contraseha');
+		
 		/*select *
 		from trabajador tj 
 		inner join persona per 
@@ -43,12 +54,12 @@ class Usuario{
 		while (! $db->EndOfSeek()) {
 			$row = $db->Row();
 			$this->logueado=true;	
-			$this->name=$row->Nombre1;
+			$this->name=$row->Nombres;
 			$this->Apellido=$row->Apellido_Paterno;
-			$this->IdTrabajador=$row->Persona_Id;
-			$this->Rol=$row->Roles_Id;
-			$this->user=$row->Usuario;
-			$this->contraseha=$row->Contrasenha;
+			$this->IdTrabajador=$row->Id_Trabajar;
+			$this->Rol=$row->id_Role;
+			$this->user=$row->usuario;
+			$this->contraseha=$row->contrasenha;
 			return true;			
 		}
 		return false;		
@@ -91,7 +102,7 @@ class Usuario{
 		return $this->foto;
 	}
 	public function obtenerPassword(){
-		return $this->contrasenha;
+		return $this->contraseha;
 	}
 	public function obtenercodTipoUsuario(){
 		return $this->codTipoUsuario;
