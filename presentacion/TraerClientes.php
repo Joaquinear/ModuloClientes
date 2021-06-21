@@ -32,11 +32,8 @@ include_once "../template/s_encabezado.php"; ?>
         <section class="content-header">
 
             <ol class="breadcrumb">
-                
-
-              
             </ol>
-            <h1>Gestion Clientes<small></small>
+            <h1>Gestion Inventarios<small></small>
             </h1>
         </section>
 
@@ -49,7 +46,7 @@ include_once "../template/s_encabezado.php"; ?>
                  
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Listado Clientes potenciales</h3>
+                                <h3 class="box-title">Listado de productos</h3>
                           
 
                             <div class="row pull-right">

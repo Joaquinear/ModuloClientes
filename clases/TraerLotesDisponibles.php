@@ -13,7 +13,13 @@ class TraerLotesDisponibles{
             return "0";
         }
         $condicion="";
-        $consulta="CALL Ver_Lotes_Disponibles";
+        $consulta="select Id_Produto,Nombre_Producto,Descripcion_Productos,
+                      Fabricante,Cantidad,Precio_Unitario, 
+                          case 
+                             when  estado = 1 then 'Activo'
+                             when estado = 2 then 'Inactivo'
+                              end as estado
+                    from producto";
         
         $db->Query($consulta);
 

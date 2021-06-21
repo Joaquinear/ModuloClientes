@@ -36,7 +36,7 @@ include_once "../template/s_encabezado.php"; ?>
 
               
             </ol>
-            <h1>Gestion Lotes<small></small>
+            <h1>Cliente Proveedor<small></small>
             </h1>
         </section>
 
@@ -49,7 +49,7 @@ include_once "../template/s_encabezado.php"; ?>
                  
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Listado Lotes</h3>
+                                <h3 class="box-title">Cliente Proveedor</h3>
                           
 
                             <!-- <div class="row pull-right">
@@ -68,12 +68,13 @@ include_once "../template/s_encabezado.php"; ?>
                                     <table class="col-md-12 table-bordered table-hover table-striped table-condensed cf" id="tablapaquetes" style="padding:0">
                                         <thead class="cf">
                                             <tr>
-                                                <th class="numeric">ID LOTE</th>
-                                                <th class="numeric">CIUDAD</th>
-                                                <th>NOMBRE URBANIZACION</th>
-                                               <th>TAMAÑO MT2</th>
-                                                <th>PRECIO</th>
-                                                 <th>TIPO MONEDA</th>
+                                                <th class="numeric">Id Producto </th>
+                                                <th >Nombre Producto</th>
+                                                <th>Descripcion del producto</th>
+                                                <th>Fabricante</th>
+                                               <th>Cantidad</th>
+                                                <th>Precio Unitario</th>
+                                                 <!-- <th>TIPO MONEDA</th> -->
                                                 <th>ESTADO</th>  
                                                 <th>ACCIONES</th>                                           
                                             </tr>
@@ -87,15 +88,17 @@ include_once "../template/s_encabezado.php"; ?>
     while (! $listaPaquete->EndOfSeek()) {    
         $row = $listaPaquete->Row();
         echo "<tr>";
-        echo "<td class='numeric' data-title='ID LOTE'>".$row->Id_Lotes."</td>";
-        echo "<td data-title='CIUDAD'>".$row->Ciudad."</td>";
-        echo "<td data-title='NOMBRE URBANIZACION'>".$row->Nombre_Urbanizacion."</td>";
-        echo "<td data-title='TAMAÑO MT2'>".$row->TamanhoMts2."</td>";
-          echo "<td data-title='PRECIO'>".$row->Precio."</td>";
-        echo "<td data-title='TIPO MONEDA'>".$row->Tipo_Moneda."</td>";
+        echo "<td  data-title='Id_Produto'>".$row->Id_Produto."</td>";
+        echo "<td data-title='Nombre_Producto'>".$row->Nombre_Producto."</td>";
+        echo "<td data-title='Descripcion_Producto'>".$row->Descripcion_Productos."</td>";
+        echo "<td data-title='Fabricante'>".$row->Fabricante."</td>";
+        echo "<td data-title='Cantidad'>".$row->Cantidad."</td>";
+          echo "<td data-title='PRECIO'>".$row->Precio_Unitario."</td>";
+        // echo "<td data-title='TIPO MONEDA'>".$row->Tipo_Moneda."</td>";
         echo "<td data-title='ESTADO'>".$row->estado."</td>";
         // 
-        echo "<td data-title='ACCION' ><button type='button' class='btn btn-success'  onclick='reservarLote(".chr(34).$row->Id_Lotes.chr(34).")'>Reservar</button>";
+        echo "<td data-title='ACCION' ><button type='button' class='btn btn-success'  onclick='reservarLote(".chr(34).$row->Id_Produto.chr(34).")'>Reservar</button><br>";
+        echo "<br>";
         echo "&nbsp;&nbsp;";
         echo "<button type='button' class='btn btn-danger'  onclick='VenderLoteContrato(".chr(34).$row->Id_Lotes.chr(34).",".chr(34).$row->Precio.chr(34).")'>Vender</button></td>";
       
@@ -350,7 +353,7 @@ function limpia() {
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title">REALIZAR RESERVA</h4>
+                        <h4 class="modal-title">REGISTRAR PRODUCTO</h4>
                     </div>
                         <div class="modal-body" style="overflow-y:auto">
                           
@@ -362,7 +365,54 @@ function limpia() {
                                 
                             </div>
                         </div>
-                    </div>  
+                    </div> 
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div >
+                                <label class="col-md-12 control-label">Nombre del Producto</label>
+                                <input type="text" name="txtNombreProducto" id="txtNombreProducto" class="form-control" required="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div >
+                                <label class="col-md-12 control-label">Descripcion Del Producto</label>
+                                <textarea type="text" name="txtdescripcionDelProducto" id="txtdescripcionDelProducto" class="form-control" required=""> </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class = "row">
+                        <div class="col-md-12">
+                            <div>
+                                <label class="col-md-12 control-label">Cantidad </label>
+                                <input type="text" name="txtCantidad" id="txtCantidad" class="form-control"   required="" onkeypress="return valideKey(event);"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <label class="col-md-12 control-label">Fabricante</label>
+                                
+                                <input type="text" name="txtFabricante" id="txtFabricante" class="form-control" required="">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div >
+                                <label class="col-md-12 control-label">Precio Unitario</label>
+                                <input type="text" name="txtPrecioUnitario" id="txtPrecioUnitario" class="form-control" required="">
+                            </div>
+                        </div>
+                    </div>
 
 
                     <div class="row">
@@ -385,7 +435,7 @@ function limpia() {
                         </div>
                     </div>  
 
-                             <div class="row">
+                    <div class="row">
                         <div class="col-md-12">
                             <div >
                                 <label class="col-md-12 control-label">Monto Reserva</label>
@@ -393,6 +443,7 @@ function limpia() {
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div >
@@ -786,6 +837,22 @@ function limpia() {
     </body>
     <script>
 
+
+        
+		function valideKey(evt){
+			
+			// code is the decimal ASCII representation of the pressed key.
+			var code = (evt.which) ? evt.which : evt.keyCode;
+			
+			if(code==8) { // backspace.
+			  return true;
+			} else if(code>=48 && code<=57) { // is a number.
+			  return true;
+			} else{ // other keys.
+			  return false;
+			}
+		}
+		
 
 
         $("#formCrear").submit(function(e){
