@@ -1,2 +1,0 @@
-cuando el producto es nuevo, ingresar a modulo de agregacion de producto.
-la compra de producto para abasteces tabla:_ "Compra_Producto" es para abastecimiento de productos. o reponision.

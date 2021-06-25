@@ -32,9 +32,8 @@ class Usuario{
 			per.Apellido_Materno,
 			tr.usuario,
 			tr.contrasenha,
-			tr.Id_Trabajar, 
-			tr.id_Role 
-		 from trabajador tr inner join persona per on tr.Id_Persona_CI = per.Ci 
+			tr.Empleado_Id
+		 from empleado tr inner join persona per on tr.Ci_Persona = per.Ci 
 		 	where usuario = '$usuario' and contrasenha = '$contraseha'";
 		// select * from personas per where (per.Usuario = '$usuario') and (per.Contrasenha = '$contraseha');
 		
@@ -56,8 +55,8 @@ class Usuario{
 			$this->logueado=true;	
 			$this->name=$row->Nombres;
 			$this->Apellido=$row->Apellido_Paterno;
-			$this->IdTrabajador=$row->Id_Trabajar;
-			$this->Rol=$row->id_Role;
+			$this->IdTrabajador=$row->Empleado_Id;
+			// $this->Rol=$row->id_Role;
 			$this->user=$row->usuario;
 			$this->contraseha=$row->contrasenha;
 			return true;			

@@ -106,21 +106,23 @@ if($operacion=="EditarUsuario"){
 if($operacion=="CrearCliente"){
     
     
+    $ci=@$_POST["txtCi"];
     $ci1=@$_POST["txtCi"];
-    $PrimerNombre=@$_POST["txtPrimerNombre"];
-    $SegundoNombre=@$_POST["txtSegundoNombre"];
+    $Nombres=@$_POST["txtNombres"];
+    //$SegundoNombre=@$_POST["txtSegundoNombre"];
     $ApellidoPaterno=@$_POST["txtApellidoPaterno"];
     $ApellidoMaterno=@$_POST["txtApellidoMaterno"];
     $TelefonoCelular=@$_POST["txtTelefonoCelular"];
-    $TelefonoFijo=@$_POST["txtTelefonoFijo"];
-    $ci2 = @$_POST["txtCi"];    
+    $edad=@$_POST["txtEdad"];
+    $nacionalidad = @$_POST["txtNacionalidad"];    
+    $Correo=@$_POST["txtCorreo"];
     $FechaReg=@$_POST["txtFechaReg"];
     $Comentario=@$_POST["txtComentario"];
 
 
     $iPersona = new Persona();
-    $resultado= $iPersona->NuevaPersona($ci1,$PrimerNombre,$SegundoNombre,$ApellidoPaterno,$ApellidoMaterno,$TelefonoCelular,$TelefonoFijo);
-    $resultado2= $iPersona->CrearCliente($FechaReg,$Comentario,$ci2);
+    $resultado= $iPersona->NuevaPersona($ci,$Nombres,$ApellidoPaterno,$ApellidoMaterno,$TelefonoCelular,$edad,$nacionalidad,$Correo);
+    $resultado2= $iPersona->CrearCliente($FechaReg,$Comentario,$ci1);
    
     echo $resultado2;
   
@@ -263,13 +265,14 @@ if($operacion=="BajaCliente"){
     
     
 
-    $ci=@$_POST["txtciBaja"];
-    $idcliente=@$_POST["txtidClienteBaja"];
+    $ci=@$_POST["txtCi"];
+    $idcliente=@$_POST["txtidCliente"];
+    $estado=@$_POST["txtEstado"];
    
 
     $iPersona = new Persona();
-    $resultado2= $iPersona->BajaClientes($ci);
-     $resultado3= $iPersona->BajaClientePersona($ci);
+    $resultado2= $iPersona->BajaClientes($idcliente,$estado);
+     //$resultado3= $iPersona->BajaClientePersona($ci);
    
     echo $resultado2;
   

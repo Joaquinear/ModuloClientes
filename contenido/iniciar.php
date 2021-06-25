@@ -13,7 +13,7 @@ if ($iUsuario->EstaLogueado()){
     $_SESSION['nombre'] = $iUsuario->obtenerNombre();
     $_SESSION['Apellido'] = $iUsuario->obtenerApellido();
 
-    $_SESSION['rol'] = $iUsuario->obtenerRol();
+    // $_SESSION['rol'] = $iUsuario->obtenerRol();
    
     $tipo=$iUsuario->obtenerPerfil();
     $_SESSION['perfil'] =$tipo;

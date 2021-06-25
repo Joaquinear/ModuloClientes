@@ -30,7 +30,7 @@ session_destroy();
 <div class="login-box" style="margin-top:0;">
      <center>
      <div class="login-logo">            
-    <a style="color:black"><b>Penta Solución</b></a>
+    <a style="color:black"><b>Modulo Clientes</b></a>
     </div>      
     </center>
  
@@ -39,8 +39,7 @@ session_destroy();
      <div class="login-logo">
     <!-- <a href="#"><b>SGC 2.0</b></a> -->
          <center>
-        <img src="../images/PentaSolucion.png" class="img-responsive" style="margin-top: 10px; margin-bottom: 20px; width: 80%;">
-    </center>
+       
   </div>  
     <!-- <div class="row">
     <div class="col-xs-12" style="text-align: center;">
@@ -58,7 +57,7 @@ session_destroy();
       </div>
       <div class="row">
         <div class="col-xs-6">
-          <button type="button" onclick="AbirModalRegistro();" class="btn btn-success btn-block btn-flat">Registrarse</button>
+         <!--  <button type="button" onclick="AbirModalRegistro();" class="btn btn-success btn-block btn-flat">Registrarse</button> -->
         </div>
         <!-- /.col -->
         <div class="col-xs-6">

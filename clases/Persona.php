@@ -8,7 +8,7 @@ class Persona{
 
 
     //******************************************************************************************************
-    function NuevaPersona($cipersona,$Primernombre,$Segundonombre,$Apellidopaterno,$Apellidomaterno,$telefonoCel,$telefonoFijo){
+    function NuevaPersona($ci,$Nombres,$ApellidoPaterno,$ApellidoMaterno,$TelefonoCelular,$edad,$nacionalidad,$Correo){
         
 
         $db= new MySQL();
@@ -17,7 +17,7 @@ class Persona{
             return "0";
         }
          
-        $consulta="INSERT INTO persona values ('$cipersona','$Primernombre','$Segundonombre','$Apellidopaterno','$Apellidomaterno','$telefonoCel','$telefonoFijo')"; 
+        $consulta="INSERT INTO persona values ('$ci','$Nombres','$ApellidoPaterno','$ApellidoMaterno','$edad','$nacionalidad','$TelefonoCelular','$Correo')"; 
         $db->ThrowExceptions = true;
         if (! $db->TransactionBegin()) $db->Kill();
         $success = true;
@@ -72,7 +72,7 @@ class Persona{
 
     }
 
-      function CrearCliente($FechaRegistro,$Comentario,$Ci_Identidad){
+      function CrearCliente($FechaRegistro,$Comentario,$ci1){
         
 
         $db= new MySQL();
@@ -81,7 +81,7 @@ class Persona{
             return "0";
         }
          
-        $consulta=" INSERT into  cliente  values ('','$FechaRegistro','$Comentario','$Ci_Identidad')"; 
+        $consulta=" INSERT into  cliente  values ('','$FechaRegistro','$Comentario','$ci1',1)"; 
         $db->Query($consulta);
         
     
@@ -115,7 +115,7 @@ class Persona{
 
     }
 
-    function BajaClientes($ci){
+    function BajaClientes($idcliente,$estado){
         
 
         $db= new MySQL();
@@ -124,8 +124,8 @@ class Persona{
             return "0";
         }
          
-        $consulta=" UPDATE cliente  set baja = '1' 
-        where cliente.idPersonaC = '$ci'"; 
+        $consulta=" UPDATE cliente  set Estado = '$estado' 
+        where cliente.Cliente_id = '$idcliente'"; 
         $db->Query($consulta);
         
     

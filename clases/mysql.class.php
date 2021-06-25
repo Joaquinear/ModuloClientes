@@ -22,7 +22,7 @@ class MySQL
 	private $db_host    = "localhost"; // server name
 	private $db_user    = "root";          // user name
 	private $db_pass    = "";          // password
-        private $db_dbname  = "a_sistemagestion_inventario";          // database name
+        private $db_dbname  = "modulo_cliente";          // database name
 	private $db_charset = "utf8";          // optional character set (i.e. utf8)
 	private $db_pcon    = false;      // use persistent connection?
 	// constants for SQLValue function

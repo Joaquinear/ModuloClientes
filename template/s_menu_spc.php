@@ -12,9 +12,9 @@
 
     ?>
 
-    	<li class="item-test"><a href="clientes.php"><i class="fa fa-list"></i><span>Gestion Lotes</span></a></li>    
+    	<!--- <li class="item-test"><a href="clientes.php"><i class="fa fa-list"></i><span>Gestion Lotes</span></a></li>    -->
         <li class="item-test"><a href="TraerClientes.php"><i class="fa fa-plus"></i><span>Gestion Clientes</span></a></li>
-        <li class="item-test"><a href="ventas.php"><i class="fa fa-money"></i><span>Lotes vendido o reservados</span></a></li>
+        <!--- <li class="item-test"><a href="ventas.php"><i class="fa fa-money"></i><span>Lotes vendido o reservados</span></a></li>-->
 <?php //}?>
 
 <?php 

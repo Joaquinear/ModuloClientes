@@ -13,7 +13,12 @@ class TraerClientesPotenciales{
             return "0";
         }
         $condicion="";
-        $consulta="select cli.Id_Cliente,per.Ci_Identidad,concat(per.Primer_Nombre,' ',per.Segundo_Nombre,' ',per.Apellido_Paterno,' ',per.Apellido_Materno) as Nombre_completo,cli.Comentario, per.Telefono_Celular,per.Telefono_Fijo from persona per inner join cliente cli on per.Ci_Identidad = cli.Ci_Identidad";
+        $consulta="select cl.Cliente_id,per.Ci,concat(per.Nombres,' ',per.Apellido_Paterno,' ',per.Apellido_Materno) as Nombre_Completo, per.edad,per.Nacionalidad,per.telefono,per.Correo,
+                        case 
+                            when cl.Estado = 1 then 'Activo'
+                            when cl.Estado = 2 then 'Inactivo'
+                        end as Estado
+                    from persona per inner join cliente cl on per.Ci = cl.Ci_Persona";
         
         $db->Query($consulta);
 

@@ -33,7 +33,7 @@ include_once "../template/s_encabezado.php"; ?>
 
             <ol class="breadcrumb">
             </ol>
-            <h1>Gestion Inventarios<small></small>
+            <h1>Modulo Clientes<small></small>
             </h1>
         </section>
 
@@ -46,7 +46,7 @@ include_once "../template/s_encabezado.php"; ?>
                  
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Listado de productos</h3>
+                                <h3 class="box-title">Clientes</h3>
                           
 
                             <div class="row pull-right">
@@ -67,10 +67,13 @@ include_once "../template/s_encabezado.php"; ?>
                                                 <th>ID de Cliente</th>
                                                 <th>Ci Cliente </th>
                                                 <th>Nombre cliente</th>
-                                                <th>Tipo</th>
-                                                <th>Telefono celular</th>
-                                                <th>Telefon fijo</th>   
-                                                <!-- <th>Acciones</th>                                           -->
+                                                <th>Edad</th>
+                                                <th>Nacionalidad</th>
+                                                <th>Telefono</th>   
+                                                <!-- <th>Acciones</th> --> 
+                                                <th>Correo</th>                                          
+                                                <th>Estado</th> 
+                                                <th>ACCIONES</th>     
                                             </tr>
                                             
                                         </thead>
@@ -81,20 +84,24 @@ include_once "../template/s_encabezado.php"; ?>
     while (! $listaPaquete->EndOfSeek()) {    
         $row = $listaPaquete->Row();
         echo "<tr>";
-        echo "<td data-title='ID de Cliente'>".$row->Id_Cliente."</td>";
-        echo "<td data-title='Ci Cliente'>".$row->Ci_Identidad."</td>";
-        echo "<td data-title='Nombre cliente'>".$row->Nombre_completo."</td>";
-        echo "<td data-title='Tipo'>".$row->Comentario."</td>";
-        echo "<td data-title='Telefono celular'>".$row->Telefono_Celular."</td>";
-        echo "<td data-title='Telefono fijo'>".$row->Telefono_Fijo."</td>";
-        
+        echo "<td data-title='ID de Cliente'>".$row->Cliente_id."</td>";
+        echo "<td data-title='Ci Cliente'>".$row->Ci."</td>";
+        echo "<td data-title='Nombre cliente'>".$row->Nombre_Completo."</td>";
+        echo "<td data-title='Edad'>".$row->edad."</td>";
+        echo "<td data-title='Nacionalidad'>".$row->Nacionalidad."</td>";
+        echo "<td data-title='Telefono'>".$row->telefono."</td>";
+        echo "<td data-title='Correo'>".$row->Correo."</td>";
+        echo "<td data-title='Estado'>".$row->Estado."</td>";
+        // aqui comienza las acciones
+    
+
+
         // 
-        // echo "<td data-title='ACCION' ><button type='button' class='btn btn-success'  onclick='EditarClientes(".chr(34).$row->ci.chr(34).",".chr(34).$row->idcliente.chr(34).",".chr(34).$row->nombrecli.chr(34).",".chr(34).$row->apellidopa.chr(34).",".chr(34).$row->apellidoma.chr(34).",".chr(34).$row->correo.chr(34).",".chr(34).$row->direccion.chr(34).")'<span class ='fa fa-check'>EDITAR</span></button>";
-        // echo "&nbsp;&nbsp;";
-        // echo "<button type='button' class='btn btn-danger'  onclick='BajaCliente(".chr(34).$row->ci.chr(34).",".chr(34).$row->idcliente.chr(34).")'<span class ='fa fa-close'>ELIMINAR</span></button>
+        echo "<td data-title='ACCION' ><button type='button' class='btn btn-success'  onclick='EditarClientes(".chr(34).$row->Ci.chr(34).",".chr(34).$row->Cliente_id.chr(34).",".chr(34).$row->Nombre_Completo.chr(34).",".chr(34).$row->apellidopa.chr(34).",".chr(34).$row->apellidoma.chr(34).",".chr(34).$row->correo.chr(34).",".chr(34).$row->direccion.chr(34).")'<span class ='fa fa-check'>EDITAR</span></button>";
         
-        
-        //  </td>";
+        echo "<td data-title='ACCION' >";
+        echo "&nbsp;&nbsp;";
+        echo "<button type='button' class='btn btn-danger'  onclick='bajaCliente(".chr(34).$row->Ci.chr(34).",".chr(34).$row->Cliente_id.chr(34).");'> Baja </button>";
       
         echo "</tr>";
         
@@ -165,7 +172,7 @@ include_once "../template/s_encabezado.php"; ?>
                  $('#txtmaterno').validCampoFranz(' abcdefghijklmnñopqrstuvwxyzáéiou');
                  
                 //Para escribir solo numeros    
-                $('#txtciADI').validCampoFranz('0123456789');    
+                $('#txtCi').validCampoFranz('0123456789');    
                 $('#txtmontototal').validCampoFranz('0123456789');  
                  $('#txtplazoADI').validCampoFranz('0123456789');    
                 
@@ -173,10 +180,15 @@ include_once "../template/s_encabezado.php"; ?>
             });
           function AdicionarCliente()
         {   
-         
-            
-        
-         $("#modalAdicionarCli" ).modal('show');
+
+         $("#modalAdicionarCli").modal('show');
+          }
+
+          function bajaCliente(cipersona,idcliente)
+        {   
+         $("#txtCi").val(cipersona);
+         $("#txtidCliente").val(idcliente);
+         $("#modalBaja").modal('show');
           }
 
             function EditarClientes(ci,idcliente,nombre,apellidopa,apellidoma,correo,direccion)
@@ -195,10 +207,10 @@ include_once "../template/s_encabezado.php"; ?>
               function BajaCliente(ci,idcliente)
             {
               
-                $("#txtciBaja").val(ci);
+                $("#txtCi").val(ci);
                 $("#txtidClienteBaja").val(idcliente);
 
-                $("#modalBajaCli").modal('show');
+                
             }
 
             
@@ -236,11 +248,11 @@ function soloLetras(e) {
 }
 
 function limpia() {
-    var val = document.getElementById("txtciADI").value;
+    var val = document.getElementById("txtCi").value;
     var tam = val.length;
     for(i = 0; i < tam; i++) {
         if(!isNaN(val[i]))
-            document.getElementById("txtciADI").value = '';
+            document.getElementById("txtCi").value = '';
     }
 }
 
@@ -270,7 +282,7 @@ function limpia() {
                         <div class="col-md-12">
                             <div >
                               
-                                <input type="hidden" name="txtci" id="txtci" class="form-control" >
+                                <input type="hidden" name="txtCi" id="txtCi" class="form-control" >
                                 <input type="hidden" name="txtidcli" id="txtidcli" class="form-control" >
 
                             </div>
@@ -326,20 +338,7 @@ function limpia() {
                                 <input type="text" name="txtcorreo" id="txtcorreo" class="form-control" >
                             </div>
                         </div>
-                    </div> 
-
-                           
-
-                     
-                       
-                    
-
-
-
-                                
-
-
-             
+                    </div>        
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success ">MODIFICAR</button>
@@ -373,7 +372,7 @@ function limpia() {
                         <div class="col-md-12">
                             <div >
                                 <label class="col-md-12 control-label">CI</label>
-                                <input type="text" name="txtCi" id="txtCi" class="form-control"  required="">
+                                <input type="text" name="txtCi" id="txtCi" class="form-control" placeholder="ejemplo : 5814012" required="">
                                 </div>
                             </div>
                         </div>  
@@ -381,23 +380,12 @@ function limpia() {
                              <div class="row">
                         <div class="col-md-12">
                             <div >
-                                <label class="col-md-12 control-label">Primer nombre</label>
-                                <input type="text" name="txtPrimerNombre" id="txtPrimerNombre" class="form-control" placeholder="Nombre" onkeypress="return soloLetras(event)" onblur="limpia()" required="" >
+                                <label class="col-md-12 control-label">Nombres</label>
+                                <input type="text" name="txtNombres" id="txtNombres" class="form-control" placeholder="Nombre" onkeypress="return soloLetras(event)" onblur="limpia()" required="" >
                                 </div>
                             </div>
                         </div>  
-
-                    
-                             <div class="row">
-                        <div class="col-md-12">
-                            <div >
-                                <label class="col-md-12 control-label">Segundo nombre</label>
-                                <input type="text" name="txtSegundoNombre" id="txtSegundoNombre" class="form-control" onkeypress="return soloLetras(event)" onblur="limpia()">
-                                </div>
-                            </div>
-                        </div>  
-
-                             <div class="row">
+                         <div class="row">
                         <div class="col-md-12">
                             <div >
                                 <label class="col-md-12 control-label">Apellido Paterno</label>
@@ -415,7 +403,7 @@ function limpia() {
                         </div>  
 
 
-                             <div class="row">
+                        <div class="row">
                         <div class="col-md-12">
                             <div >
                                 <label class="col-md-12 control-label">Telefono Celular</label>
@@ -423,14 +411,34 @@ function limpia() {
                                 </div>
                             </div>
                         </div> 
+
                         <div class="row">
                         <div class="col-md-12">
                             <div >
-                                <label class="col-md-12 control-label">Telefono Fijo</label>
-                                <input type="text" name="txtTelefonoFijo" id="txtTelefonoFijo" class="form-control" placeholder="Por ejemplo, 3123566" required="" >
+                                <label class="col-md-12 control-label">Edad</label>
+                                <input type="text" name="txtEdad" id="txtEdad" class="form-control" placeholder="ejemplo : 26" required="" >
                                 </div>
                             </div>
                         </div> 
+
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div >
+                                <label class="col-md-12 control-label">Nacionalidad</label>
+                                <input type="text" name="txtNacionalidad" id="txtNacionalidad" class="form-control" placeholder="Por ejemplo: Boliviano" required="" >
+                                </div>
+                            </div>
+                        </div> 
+
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div >
+                                <label class="col-md-12 control-label">Correo</label>
+                                <input type="email" name="txtCorreo" id="txtCorreo" class="form-control" placeholder="Por ejemplo: CorreoCliente@Sion.com" required="" >
+                                </div>
+                            </div>
+                        </div> 
+
                         <div class="row">
                         <div class="col-md-12">
                             <div >
@@ -449,58 +457,66 @@ function limpia() {
                             </div>
                         </div> 
                         <div><br></div>
-
-                        
-                           
-                         
                          <!--<div class="modal-footer"> -->
                          <button type="submit" class="btn btn-success">CREAR CLIENTE</button> 
                          <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">CERRAR</button> 
                          <!-- </div> -->
-                         </form> </div> </div> </div>
+                         </form> </div> </div> </div></div>
+
+
+<div class="modal fade" id="modalBaja" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm" role="document"  >
+                <div class="modal-content">
+                  <form id="formBaja" name="formBaja" method="POST" action="../presentacion/respuestaparcial.php?operacion=BajaCliente">
+                    
+                  
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Baja Cliente</h4>
+                    </div>
+                        <div class="modal-body" style="overflow-y:auto">
+                          
+
+                            <div class="row">
+                        <div class="col-md-12">
+                            <div >
+                                <label class="col-md-12 control-label">CI</label>
+                                <input type="text" name="txtCi" id="txtCi" class="form-control" required="">
+                                </div>
+                            </div>
+                        </div>  
+
+                             <div class="row">
+                        <div class="col-md-12">
+                            <div >
+                                <label class="col-md-12 control-label">idCliente</label>
+                                <input type="text" name="txtidCliente" id="txtidCliente" class="form-control" placeholder="Nombre" onkeypress="return soloLetras(event)" onblur="limpia()" required="" >
+                                </div>
+                            </div>
+                        </div>  
+                         <div class="row">
+                        <div class="col-md-12">
+                            <div >
+                                <label class="col-md-12 control-label">Estado</label>
+                                <!--<input type="text" name="txtApellidoPaterno" id="txtApellidoPaterno" class="form-control" onkeypress="return soloLetras(event)" onblur="limpia()" required="">-->
+                                <select name="txtEstado" id="txtEstado" class="form-control" >
+                                    <option value="1">Activo</option>
+                                    <option value="2">Inactivo</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>  
+                         <!--<div class="modal-footer"> -->
+                         <button type="submit" class="btn btn-success">Cambiar estado</button> 
+                         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">CERRAR</button> 
+                         <!-- </div> -->
+                         </form> </div> </div> </div></div>
               
-<?php//////////////////////////////////////// eliminar cliente ?>
-<div class="modal fade" id="modalBajaCli" name="modalBajaCli"  role="dialog" style=" overflow: auto; width: 100%;">
-  <div class="modal-dialog modal-sm" role="document" id="dialog-formImgageClase" style="width: 50%;margin: auto;">
-    <div class="modal-content" id="dialog-formImagenContent">
-      <div class="modal-header">
-        <h3>DATOS DEL CLIENTE</h3>
-      </div>
-      
-      <div class="modal-body"  id="dialog-formImagenBody" align="center">
-        <form role="form" action="../presentacion/respuestaparcial.php?operacion=BajaCliente" id="frmBajaCliente" name="frmBajaCliente">
-          <div class="row">
+<!-- -->
 
-            
-            <input type="hidden" name="txtciBaja" id="txtciBaja">
-           <input type="hidden" name="txtidClienteBaja" id="txtidClienteBaja">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="txmarcaMOD">ESTAS SEGURO DE ELIMINAR EL CLIENTE?</label>
-                   <button  type="submit" class="btn btn-success">ACEPTAR</button>           
-          <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancelar</button>
-              </div>                                         
-            </div>
-          
-           
-          
-            
-            
-            
-            
 
-            
-          </div>
-        </form>
-
-       
-        
-
-        
-      </div>
-    </div>
-  </div>
-</div>
+              
 <?php ///////////////////////////////////////// ?>
     </body>
     <script>
@@ -577,7 +593,8 @@ function limpia() {
             });
 
 
-        $("#frmBajaCliente").submit(function(e){
+
+            $("#formBaja").submit(function(e){
                 
                 var postData = $(this).serializeArray();
         var formURL = $(this).attr("action");
@@ -590,9 +607,9 @@ function limpia() {
           success:function(data, textStatus, jqXHR)
           {
             if (data == "OK") {
-              $('#modalBajaCli').modal('hide');
+              $('#modalBaja').modal('hide');
               FinCargando();
-              MostrarMensaje2('Se ha eliminado satisfactoriamente');
+              MostrarMensaje2('Se ha creado satisfactoriamente');
             }else{
 
                             MostrarMensaje(data,'error');
@@ -612,5 +629,9 @@ function limpia() {
 
                 e.preventDefault(); //STOP default action
             });
+
+
+
+
     </script>
 </html>
